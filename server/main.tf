@@ -1,3 +1,8 @@
+ provider "aws" {
+  # MODIFY this line to look for 2.27.0 or greater
+    version = ">= 2.27.0"
+  }  
+
 resource "aws_key_pair" "default" {
   key_name   = "${var.identity}-key"
   public_key = var.public_key
@@ -46,10 +51,7 @@ resource "aws_instance" "web" {
     Name     = "${var.identity} web ${count.index + 1}/${var.num_webs}"
     Identity = var.identity
   }
-  provider "aws" {
-  # MODIFY this line to look for 2.27.0 or greater
-    version = ">= 2.27.0"
-  }  
+ 
   connection {
     type        = "ssh"
     user        = "ubuntu"
