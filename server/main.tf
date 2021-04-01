@@ -46,7 +46,10 @@ resource "aws_instance" "web" {
     Name     = "${var.identity} web ${count.index + 1}/${var.num_webs}"
     Identity = var.identity
   }
-
+  provider "aws" {
+  # MODIFY this line to look for 2.27.0 or greater
+    version = ">= 2.27.0"
+  }  
   connection {
     type        = "ssh"
     user        = "ubuntu"
